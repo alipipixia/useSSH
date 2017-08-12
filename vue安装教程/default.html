@@ -1,0 +1,195 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vue 安装教程（自己安装过程及遇到的一些坑） - 流星翼 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="css/blog-common.css"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="css/bundle-coffee.css"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="css/bundle-coffee-mobile.css"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/miller-star/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/miller-star/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/miller-star/wlwmanifest.xml"/>
+<script src="js/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'miller-star', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="js/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/miller-star/"><img id="blogLogo" src="picture/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/miller-star/">流星翼</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/miller-star/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%B5%81%E6%98%9F%E7%BF%BC">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/miller-star/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/miller-star/rss"><img src="picture/xml.gif" alt="订阅" /></a></li>
+</ul>
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats">
+<!--done-->
+随笔- 5&nbsp;
+文章- 0&nbsp;
+评论- 5&nbsp;
+</div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/miller-star/p/6394760.html">vue 安装教程（自己安装过程及遇到的一些坑）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>1.安装node.js(http://www.runoob.com/nodejs/nodejs-install-setup.html)</p>
+<p>2.基于node.js,利用淘宝npm镜像安装相关依赖</p>
+<p>&nbsp;在cmd里直接输入：npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a>，回车，等待安装...</p>
+<p>3.安装全局vue-cli脚手架,用于帮助搭建所需的模板框架</p>
+<p>在cmd里 1)输入：cnpm install -g vue-cli，回车，等待安装...</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2).输入：vue，回车，若出现vue信息说明表示成功</p>
+<p>4.创建项目</p>
+<p>在cmd里输入：vue init webpack vue_test(项目文件夹名)，回车，等待一小会儿，依次出现‘git’下的项，可按下图操作</p>
+<p><img src="picture/1000531-20161104114221752-1894187307.png" alt=""></p>
+<p>5.安装依赖</p>
+<p>在cmd里 &nbsp;1).输入：cd vue_test（项目名），回车，进入到具体项目文件夹</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2).输入：npm install，回车，等待一小会儿</p>
+<p>回到项目文件夹，会发现项目结构里，多了一个node_modules文件夹（该文件里的内容就是之前安装的依赖）</p>
+<p>基于脚手架创建的默认项目结构如下图所示：</p>
+<p><img src="picture/1000531-20161104120244799-2006728410.png" alt=""></p>
+<p>6.测试环境是否搭建成功</p>
+<p>方法1：在cmd里输入：npm run&nbsp;dev</p>
+<p>方法2：在浏览里输入：localhost:8080(默认端口为8080)</p>
+<p>运行起来后的效果如下图所示：</p>
+<p><img src="picture/1000531-20161104121102221-395461091.png" alt=""></p>
+<p>&nbsp;问题：</p>
+<p>在安装过程中，你可能会遇到这个问题.</p>
+<p>当我们运行某个项目是 会提示</p>
+<div class="cnblogs_code">
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="picture/copycode.gif" alt="复制代码"></a></span></div>
+<pre>&gt; my-first-vue-project@1.0.0 dev C:\Users\ASUS\my-project
+&gt; node build/dev-server.js
+
+
+To use this template, you must update following to modules:
+
+  npm: 2.15.9 should be &gt;= 3.0.0</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a title="复制代码"><img src="picture/copycode.gif" alt="复制代码"></a></span></div>
+</div>
+<p>这是只有升级npm</p>
+<p>即是 ：使用&nbsp;npm -g install&nbsp;npm@3.0.0 （版本号2.9.1 可以根据已发布的版本随意升级或降级），获取最新版本的npm 文件</p>
+<p>查看版本：</p>
+<p><img src="picture/867135-20170108113456878-1795581280.png" alt=""></p>
+<p>这时在项目中进行 &nbsp;npm run dev 时还是会 提示</p>
+<p><img src="picture/867135-20170108113616097-821648000.png" alt=""></p>
+<p>因此还有一部关键的一步：</p>
+<p><strong>复制C:\Users\{你的Windows用户名}\AppData\Roaming\npm\node_modules\npm下的文件到你的 NodeJS安装目录下的&nbsp;\node_modules\npm&nbsp;中，覆盖掉原有的全部文件</strong></p>
+<p>最后运行 &nbsp;npm run &nbsp;dev 成功运行<strong><br></strong></p>
+<p><img src="picture/867135-20170108113826472-5271988.png" alt=""></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-02-13 17:37</span> <a href='http://www.cnblogs.com/miller-star/'>流星翼</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6394760" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6394760);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=332084,cb_entryId=6394760,cb_blogApp=currentBlogApp,cb_blogUserGuid='39131441-c4f1-e611-845c-ac853d9f53ac',cb_entryCreatedDate='2017/2/13 17:37:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 流星翼
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

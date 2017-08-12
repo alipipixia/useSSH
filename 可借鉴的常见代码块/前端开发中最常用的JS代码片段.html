@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <title>前端开发中最常用的JS代码片段</title>
+
+
+    <meta name="360-site-verification" content="e65ff9c8e6cec15bab7efa4415a86607" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/catenav.js"></script>
+    <script type="text/javascript" src="js/shcore.js"></script>
+    <script type="text/javascript" src="js/shbrushjscript.js"></script>
+    <script type="text/javascript" src="js/shbrushxml.js"></script>
+    <script type="text/javascript" src="js/shbrushcss.js"></script>
+    <link href="css/shcoreeclipse.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+    <div id="content">
+        <div class="content-x">
+            <div class="content-sc content-article">
+                <div class="content-header">
+                    <h1 style="font-size: 26px;font-weight: normal;font-family: 微软雅黑;">分享一些前端开发中最常用的JS代码片段</h1>
+                    <div class="content-x-m" style="padding-top: 15px">
+                        <div class="entry art_content" id="art_content">
+                            <h2>HTML5 DOM 选择器</h2>
+                            <pre class="brush:js">
+// querySelector() 返回匹配到的第一个元素
+var item = document.querySelector('.item');
+console.log(item);
+
+// querySelectorAll() 返回匹配到的所有元素，是一个nodeList集合
+var items = document.querySelectorAll('.item');
+console.log(items[0]);
+</pre>
+                            <h2>阻止默认行为</h2>
+                            <pre class="brush:js">
+// 原生js
+document.getElementById('btn').addEventListener('click', function (event) {
+    event = event || window.event；
+
+    if (event.preventDefault){
+        // w3c方法 阻止默认行为
+        event.preventDefault();
+    } else{
+        // ie 阻止默认行为
+        event.returnValue = false;
+    }
+}, false);
+
+// jQuery
+$('#btn').on('click', function (event) {
+    event.preventDefault();
+});
+</pre>
+                            <h2>阻止冒泡</h2>
+                            <pre class="brush:js">
+// 原生js
+document.getElementById('btn').addEventListener('click', function (event) {
+    event = event || window.event；
+
+    if (event.stopPropagation){
+        // w3c方法 阻止冒泡
+        event.stopPropagation();
+    } else{
+        // ie 阻止冒泡
+        event.cancelBubble = true;
+    }
+}, false);
+
+// jQuery
+$('#btn').on('click', function (event) {
+    event.stopPropagation();
+});
+</pre>
+                            <h2>鼠标滚轮事件</h2>
+                            <pre class="brush:js">
+$('#content').on("mousewheel DOMMouseScroll", function (event) { 
+    // chrome & ie || // firefox
+    var delta = (event.originalEvent.wheelDelta && (event.originalEvent.wheelDelta > 0 ? 1 : -1)) || 
+        (event.originalEvent.detail && (event.originalEvent.detail > 0 ? -1 : 1));  
+    
+    if (delta > 0) { 
+        // 向上滚动
+        console.log('mousewheel top');
+    } else if (delta < 0) {
+        // 向下滚动
+        console.log('mousewheel bottom');
+    } 
+});
+</pre>
+                            <h2>检测浏览器是否支持svg</h2>
+                            <pre class="brush:js">
+function isSupportSVG() { 
+    var SVG_NS = 'http://www.w3.org/2000/svg';
+    return !!document.createElementNS &&!!document.createElementNS(SVG_NS, 'svg').createSVGRect; 
+} 
+
+// 测试
+console.log(isSupportSVG());
+</pre>
+                            <h2>检测浏览器是否支持canvas</h2>
+                            <pre class="brush:js">
+function isSupportCanvas() {
+    if(document.createElement('canvas').getContext){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+// 测试，打开谷歌浏览器控制台查看结果
+console.log(isSupportCanvas());
+</pre>
+                            <h2>检测是否是微信浏览器</h2>
+                            <pre class="brush:js">
+function isWeiXinClient() {
+    var ua = navigator.userAgent.toLowerCase(); 
+    if (ua.match(/MicroMessenger/i)=="micromessenger") { 
+        return true; 
+    } else { 
+        return false; 
+    }
+}
+
+// 测试
+alert(isWeiXinClient());
+</pre>
+                            <h2>jQuery 获取鼠标在元素上的坐标</h2>
+                            <pre class="brush:js">
+$('#ele').click(function(event){
+    //获取鼠标在图片上的坐标 
+    console.log('X：' + event.offsetX+'\n Y:' + event.offsetY); 
+    
+    //获取元素相对于页面的坐标 
+    console.log('X：'+$(this).offset().left+'\n Y:'+$(this).offset().top);
+});
+</pre>
+                            <h2>验证码倒计时代码</h2>
+                            <pre class="brush:js">
+<!-- dom -->
+<input id="send" type="button" value="发送验证码">
+</pre>
+                            <pre class="brush:js">
+// 原生js版本
+var times = 60, // 临时设为60秒
+    timer = null;
+            
+document.getElementById('send').onclick = function () {
+    // 计时开始
+    timer = setInterval(function () {
+        times--;
+        
+        if (times <= 0) {
+            send.value = '发送验证码';
+            clearInterval(timer);
+            send.disabled = false;
+            times = 60;
+        } else {
+            send.value = times + '秒后重试';
+            send.disabled = true;
+        }
+    }, 1000);
+}
+</pre>
+                            <pre class="brush:js">
+// jQuery版本
+var times = 60,
+    timer = null;
+
+$('#send').on('click', function () {
+    var $this = $(this);
+    
+    // 计时开始
+    timer = setInterval(function () {
+        times--;
+        
+        if (times <= 0) {
+            $this.val('发送验证码');
+            clearInterval(timer);
+            $this.attr('disabled', false);
+            times = 60;
+        } else {
+            $this.val(times + '秒后重试');
+            $this.attr('disabled', true);
+        }
+    }, 1000);
+});
+</pre>
+                            <h2>常用的一些正则表达式</h2>
+                            <pre class="brush:js">
+//匹配字母、数字、中文字符 
+/^([A-Za-z0-9]|[\u4e00-\u9fa5])*$/ 
+
+//验证邮箱 
+/^\w+@([0-9a-zA-Z]+[.])+[a-z]{2,4}$/ 
+
+//验证手机号 
+/^1[3|5|8|7]\d{9}$/ 
+
+//验证URL 
+/^http:\/\/.+\./
+
+//验证身份证号码 
+/(^\d{15}$)|(^\d{17}([0-9]|X|x)$)/ 
+
+//匹配中文字符的正则表达式 
+/[\u4e00-\u9fa5]/ 
+
+//匹配双字节字符(包括汉字在内) 
+/[^\x00-\xff]/
+</pre>
+                            <h2>js时间戳、毫秒格式化</h2>
+                            <pre class="brush:js">
+function formatDate(now) { 
+    var y = now.getFullYear();
+    var m = now.getMonth() + 1; // 注意js里的月要加1 
+    var d = now.getDate();
+    var h = now.getHours(); 
+    var m = now.getMinutes(); 
+    var s = now.getSeconds();
+    
+    return y + "-" + m + "-" + d + " " + h + ":" + m + ":" + s; 
+} 
+
+var nowDate = new Date(1442978789184);
+
+alert(formatDate(nowDate));
+</pre>
+                            <h2>js限定字符数（注意：一个汉字算2个字符）</h2>
+                            <pre class="brush:js">
+<input id="txt" type="text">
+</pre>
+                            <pre class="brush:js">
+//字符串截取
+function getByteVal(val, max) {
+    var returnValue = '';
+    var byteValLen = 0;
+    for (var i = 0; i < val.length; i++) { if (val[i].match(/[^\x00-\xff]/ig) != null) byteValLen += 2; else byteValLen += 1; if (byteValLen > max) break;
+        returnValue += val[i];
+    }
+    return returnValue;
+}
+
+$('#txt').on('keyup', function () {
+    var val = this.value;
+    if (val.replace(/[^\x00-\xff]/g, "**").length > 14) {
+        this.value = getByteVal(val, 14);
+    }
+});
+</pre>
+                            <h2>js判断是否移动端及浏览器内核</h2>
+                            <pre class="brush:js">
+var browser = { 
+    versions: function() { 
+        var u = navigator.userAgent; 
+        return { 
+            trident: u.indexOf('Trident') > -1, //IE内核 
+            presto: u.indexOf('Presto') > -1, //opera内核 
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核 
+            gecko: u.indexOf('Firefox') > -1, //火狐内核Gecko 
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端 
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios 
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android 
+            iPhone: u.indexOf('iPhone') > -1 , //iPhone 
+            iPad: u.indexOf('iPad') > -1, //iPad 
+            webApp: u.indexOf('Safari') > -1 //Safari 
+        }; 
+    }
+} 
+
+if (browser.versions.mobile() || browser.versions.ios() || browser.versions.android() || browser.versions.iPhone() || browser.versions.iPad()) { 
+    alert('移动端'); 
+}
+</pre>
+                            <p>之前我用过一个检测客户端的库 觉得挺好用的，也推荐给大家 叫 device.js，大家可以 Googel 或 百度<br /> GItHub仓库地址：
+                                <a href="https://github.com/matthewhudson/device.js" target="_blank">https://github.com/matthewhudson/device.js</a></p>
+                            <h2>getBoundingClientRect() 获取元素位置</h2>
+                            <pre class="brush:js">
+//它返回一个对象，其中包含了left、right、top、bottom四个属性
+var myDiv = document.getElementById('myDiv');
+var x = myDiv.getBoundingClientRect().left; 
+var y = myDiv.getBoundingClientRect().top; 
+
+// 相当于jquery的： $(this).offset().left、$(this).offset().top // js的：this.offsetLeft、this.offsetTop
+</pre>
+                            <h2>HTML5全屏</h2>
+                            <pre class="brush:js">
+function fullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+
+fullscreen(document.documentElement);
+</pre>
+                        </div>
+                       
+                       
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="right-bar">
+        	<div class="page_right">
+				<div id="Catalog_box">
+
+					<div id="toolbar">
+						<div id="toolbar-c"></div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+            <div class="content-tutorial-right-atricle content-tutorial-right" style="width: 300px;margin-top: 20px;">
+                <div id="Catalog_box" style="width: 300px;">
+
+                    <div id="toolbar">
+                        <div id="toolbar-c"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            SyntaxHighlighter.defaults['gutter'] = false;
+            // SyntaxHighlighter.defaults['html-script'] = false;
+            SyntaxHighlighter.all();
+            $.CateNav('#art_content', '#Catalog_box');
+
+
+            $('#Catalog_box').height($('#Catalog_box').height() - 120);
+            $('#toolbar-c').height($('#odl').height() / 4);
+            $('#toolbar').height($('#Catalog_box').height());
+
+            if ($('#odl').length <= 0 || $('#odl').height() < $(window).height()) {
+                $('#toolbar').css('display', 'none');
+                return false;
+            }
+            var toolbar = document.getElementById('toolbar');
+            var toolbarC = document.getElementById('toolbar-c');
+            var catalogBox = document.getElementById('Catalog_box');
+            var oDl = document.getElementById('odl');
+
+            var iMaxTop = toolbar.offsetHeight - toolbarC.offsetHeight;
+
+            toolbarC.onmousedown = function (ev) {
+
+                var ev = ev || event;
+                var disY = ev.clientY - this.offsetTop;
+                document.onmousemove = function (ev) {
+                    var ev = ev || event;
+                    var T = ev.clientY - disY;
+                    if (T < 0) {
+                        T = 0;
+                    } else if (T > iMaxTop) {
+                        T = iMaxTop;
+                    }
+                    toolbarC.style.top = T + 'px';
+                    var iScale = T / iMaxTop;
+                    oDl.style.top = (catalogBox.clientHeight - oDl.offsetHeight) * iScale + 'px';
+                }
+                document.onmouseup = function () {
+                    document.onmousemove = document.onmouseup = null;
+                }
+
+                return false;
+
+            }
+
+        })
+    </script>
+ 
+
+</body>
+
+</html>

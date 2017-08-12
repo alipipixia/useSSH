@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<title>一劳永逸的搞定 flex 布局 &#8211; </title>
+	<meta name="360-site-verification" content="e65ff9c8e6cec15bab7efa4415a86607" />
+	<link href="css/style.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/catenav.js"></script>
+	<script type="text/javascript" src="js/shcore.js"></script>
+	<script type="text/javascript" src="js/shbrushjscript.js"></script>
+	<script type="text/javascript" src="js/shbrushxml.js"></script>
+	<script type="text/javascript" src="js/shbrushcss.js"></script>
+	<link href="css/shcoreeclipse.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id="content">
+		<div class="content-x">
+			<div class="content-sc content-article">
+				<div class="content-header">
+					<h1 style="font-size: 26px;font-weight: normal;font-family: 微软雅黑;">一劳永逸的搞定 flex 布局</h1>
+					<div class="content-x-m" style="padding-top: 15px">
+						<div class="entry art_content" id="art_content">
+							<h2>寻根溯源话布局</h2>
+							<p>一切都始于这样一个问题：怎样通过 CSS 简单而优雅的实现水平、垂直同时居中。记得刚开始学习 CSS 的时候，看到 float 属性不由得感觉眼前一亮，顺理成章的联想到 Word 文档排版中用到的的左对齐、右对齐和居中对齐，然而很快就失望的发现
+								CSS 中并不存在 float: center 的写法，那么 text-align: center、verticle-align: center 是否可行呢？答案也是否定的。这两个属性只能用于行内元素，对于块级元素的布局是无效的。</p>
+							<p>在网页布局没有进入 CSS 的时代，排版几乎是通过 table 元素实现的，在 table 的单元格里可以方便的使用 align、valign 来实现水平和垂直方向的对齐，随着 Web 语义化的流行，这些写法逐渐淡出了视野，CSS
+								标准为我们提供了 3 种布局方式：标准文档流、浮动布局和定位布局。这几种方式的搭配使用可以轻松搞定 PC 端页面的常见需求，比如实现水平居中可以使用 margin: 0 auto，实现水平垂直同时居中可以如下设置：</p>
+
+							<p>然而，这些写法都存在一些缺陷：缺少语义并且不够灵活。我们需要的是通过 1 个属性就能优雅的实现子元素居中或均匀分布，甚至可以随着窗口缩放自动适应。在这样的需求下，CSS 的第 4 种布局方式诞生了，这就是flex 布局。
+							</p>
+							<h2>flex 基本概念</h2>
+							<p>使用 flex 布局首先要设置父容器 display: flex，然后再设置 justify-content: center 实现水平居中，最后设置 align-items: center 实现垂直居中。</p>
+							<pre class="brush:css">
+#dad {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+</pre>
+							<p><img src="picture/flex58-1.png" /></p>
+							<p>就是这么简单，大功告成。等等，好像哪里不对，justify-content 和 align-items 是啥？哪里可以看出横向、竖向的语义？是的，flex 的确没有那么简单，这就要从两个基本概念说起了。<br />
+								<img src="picture/flex58-2.png" /></p>
+							<p>说来也不难，flex 的核心的概念就是 容器 和 轴。容器包括外层的 父容器 和内层的 子容器，轴包括 主轴 和 交叉轴，可以说 flex 布局的全部特性都构建在这两个概念上。flex 布局涉及到 12 个 CSS 属性（不含
+								display: flex），其中父容器、子容器各 6 个。不过常用的属性只有 4 个，父容器、子容器各 2 个，我们就先从常用的说起吧。</p>
+							<h3>容器</h3>
+							<p>容器具有这样的特点：父容器可以统一设置子容器的排列方式，子容器也可以单独设置自身的排列方式，如果两者同时设置，以子容器的设置为准。</p>
+							<p><img src="picture/flex58-3.png" /></p>
+							<p><strong>父容器</strong></p>
+							<ul>
+								<li>设置子容器沿主轴排列：justify-content</li>
+							</ul>
+							<p>justify-content 属性用于定义如何沿着主轴方向排列子容器。</p>
+							<p><img src="picture/flex58-4.png" /></p>
+							<p>flex-start：起始端对齐<br />
+								<img src="picture/flex58-5.png" /></p>
+							<p>flex-end：末尾段对齐<br />
+								<img src="picture/flex58-6.png" /></p>
+							<p>center：居中对齐<br />
+								<img src="picture/flex58-7.png" /></p>
+							<p>space-around：子容器沿主轴均匀分布，位于首尾两端的子容器到父容器的距离是子容器间距的一半。<br />
+								<img src="picture/flex58-8.png" /></p>
+							<p>space-between：子容器沿主轴均匀分布，位于首尾两端的子容器与父容器相切。<br />
+								<img src="picture/flex58-9.png" /></p>
+							<ul>
+								<li>设置子容器如何沿交叉轴排列：align-items</li>
+							</ul>
+							<p>align-items 属性用于定义如何沿着交叉轴方向分配子容器的间距。<br />
+								<img src="picture/flex58-10.png" /></p>
+							<p>flex-start：起始端对齐<br />
+								<img src="picture/flex58-11.png" /></p>
+							<p>flex-end：末尾段对齐<br />
+								<img src="picture/flex58-12.png" /></p>
+							<p>center：居中对齐<br />
+								<img src="picture/flex58-13.png" /></p>
+							<p>baseline：基线对齐，这里的 baseline 默认是指首行文字，即 first baseline，所有子容器向基线对齐，交叉轴起点到元素基线距离最大的子容器将会与交叉轴起始端相切以确定基线。<br />
+								<img src="picture/flex58-14.png" /></p>
+							<p>stretch：子容器沿交叉轴方向的尺寸拉伸至与父容器一致。<br />
+								<img src="picture/flex58-15.png" /></p>
+							<p><strong>子容器</strong></p>
+							<ul>
+								<li>在主轴上如何伸缩：flex</li>
+							</ul>
+							<p><img src="picture/flex58-16.png" /><br /> 子容器是有弹性的（flex 即弹性），它们会自动填充剩余空间，子容器的伸缩比例由 flex 属性确定。</p>
+							<p>flex 的值可以是无单位数字（如：1, 2, 3），也可以是有单位数字（如：15px，30px，60px），还可以是 none 关键字。子容器会按照 flex 定义的尺寸比例自动伸缩，如果取值为 none 则不伸缩。</p>
+							<p>虽然 flex 是多个属性的缩写，允许 1 &#8211; 3 个值连用，但通常用 1 个值就可以满足需求，它的全部写法可参考下图。<br />
+								<img src="picture/flex58-17.png" /></p>
+							<ul>
+								<li>单独设置子容器如何沿交叉轴排列：align-self</li>
+							</ul>
+							<p><img src="picture/flex58-18.png" /></p>
+							<p>每个子容器也可以单独定义沿交叉轴排列的方式，此属性的可选值与父容器 align-items 属性完全一致，如果两者同时设置则以子容器的 align-self 属性为准。</p>
+							<p>flex-start：起始端对齐<br />
+								<img src="picture/flex58-19.png" /></p>
+							<p>flex-end：末尾段对齐<br />
+								<img src="picture/flex58-20.png" /></p>
+							<p>center：居中对齐<br />
+								<img src="picture/flex58-21.png" /></p>
+							<p>baseline：基线对齐<br />
+								<img src="picture/flex58-22.png" /></p>
+							<p>stretch：拉伸对齐<br />
+								<img src="picture/flex58-23.png" /></p>
+							<h3>轴</h3>
+							<p>如图所示，轴 包括 主轴 和 交叉轴，我们知道 justify-content 属性决定子容器沿主轴的排列方式，align-items 属性决定子容器沿着交叉轴的排列方式。那么轴本身又是怎样确定的呢？在 flex 布局中，flex-direction
+								属性决定主轴的方向，交叉轴的方向由主轴确定。
+								<br />
+								<img src="picture/flex58-24.png" /></p>
+							<p><strong>主轴</strong><br /> 主轴的起始端由 flex-start 表示，末尾段由 flex-end 表示。不同的主轴方向对应的起始端、末尾段的位置也不相同。<br /> 向右：flex-direction:
+								row
+								<br />
+								<img src="picture/flex58-25.png" /><br /> 向下：flex-direction: column<br />
+								<img src="picture/flex58-26.png" /><br /> 向左：flex-direction: row-reverse<br />
+								<img src="picture/flex58-27.png" /><br /> 向上：flex-direction: column-reverse<br />
+								<img src="picture/flex58-28.png" /></p>
+							<p><strong>交叉轴</strong><br /> 主轴沿逆时针方向旋转 90° 就得到了交叉轴，交叉轴的起始端和末尾段也由 flex-start 和 flex-end 表示。</p>
+							<p>上面介绍的几项属性是 flex 布局中最常用到的部分，一般来说可以满足大多数需求，如果实现复杂的布局还需要深入了解更多的属性。</p>
+							<h2>flex 进阶概念</h2>
+							<h3>父容器</h3>
+							<ul>
+								<li>设置换行方式：flex-wrap</li>
+							</ul>
+							<p>决定子容器是否换行排列，不但可以顺序换行而且支持逆序换行。<br />
+								<img src="picture/flex58-29.png" /></p>
+							<p>nowrap：不换行<br />
+								<img src="picture/flex58-30.png" /></p>
+							<p>wrap：换行<br />
+								<img src="picture/flex58-31.png" /></p>
+							<p>wrap-reverse：逆序换行<br /> 逆序换行是指沿着交叉轴的反方向换行。
+								<br />
+								<img src="picture/flex58-32.png" /></p>
+							<ul>
+								<li>轴向与换行组合设置：flex-flow</li>
+							</ul>
+							<p>flow 即流向，也就是子容器沿着哪个方向流动，流动到终点是否允许换行，比如 flex-flow: row wrap，flex-flow 是一个复合属性，相当于 flex-direction 与 flex-wrap 的组合，可选的取值如下：<br
+								/> 1、row、column 等，可单独设置主轴方向</p>
+							<p>2、wrap、nowrap 等，可单独设置换行方式</p>
+							<p>3、row nowrap、column wrap 等，也可两者同时设置</p>
+							<ul>
+								<li>多行沿交叉轴对齐：align-content</li>
+							</ul>
+							<p>当子容器多行排列时，设置行与行之间的对齐方式。<br />
+								<img src="picture/flex58-33.png" /></p>
+							<p>flex-start：起始端对齐<br />
+								<img src="picture/flex58-34.png" /></p>
+							<p>flex-end：末尾段对齐<br />
+								<img src="picture/flex58-35.png" /></p>
+							<p>center：居中对齐<br />
+								<img src="picture/flex58-36.png" /></p>
+							<p>space-around：等边距均匀分布<br />
+								<img src="picture/flex58-37.png" /></p>
+							<p>space-between：等间距均匀分布<br />
+								<img src="picture/flex58-38.png" /></p>
+							<p>stretch：拉伸对齐<br />
+								<img src="picture/flex58-39.png" /></p>
+							<h3>子容器</h3>
+							<ul>
+								<li>设置基准大小：flex-basis</li>
+							</ul>
+							<p>flex-basis 表示在不伸缩的情况下子容器的原始尺寸。主轴为横向时代表宽度，主轴为纵向时代表高度。<br />
+								<img src="picture/flex58-40.png" /><br />
+								<img src="picture/flex58-41.png" /></p>
+							<ul>
+								<li>设置扩展比例：flex-grow</li>
+							</ul>
+							<p>子容器弹性伸展的比例。如图，剩余空间按 1:2 的比例分配给子容器。<br />
+								<img src="picture/flex58-42.png" /><br />
+								<img src="picture/flex58-43.png" /></p>
+							<ul>
+								<li>设置收缩比例：flex-shrink</li>
+							</ul>
+							<p>子容器弹性收缩的比例。如图，超出的部分按 1:2 的比例从给子容器中减去。<br />
+								<img src="picture/flex58-44.png" /><br />
+								<img src="picture/flex58-45.png" /></p>
+							<ul>
+								<li>设置排列顺序：order</li>
+							</ul>
+							<p>改变子容器的排列顺序，覆盖 HTML 代码中的顺序，默认值为 0，可以为负值，数值越小排列越靠前。<br />
+								<img src="picture/flex58-46.png" /></p>
+							<p>以上就是 flex 布局的全部属性，一共 12 个，父容器、子容器各 6 个，可以随时通过下图进行回顾。<br />
+								<img src="picture/flex58-47.png" /></p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="content-tutorial-right-atricle content-tutorial-right" style="width: 300px;margin-top: 20px;">
+				<div id="Catalog_box" style="width: 300px;">
+
+					<div id="toolbar">
+						<div id="toolbar-c"></div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function () {
+			SyntaxHighlighter.defaults['gutter'] = false;
+			// SyntaxHighlighter.defaults['html-script'] = false;
+			SyntaxHighlighter.all();
+			$.CateNav('#art_content', '#Catalog_box');
+
+
+			$('#Catalog_box').height($('#Catalog_box').height() - 120);
+			$('#toolbar-c').height($('#odl').height() / 4);
+			$('#toolbar').height($('#Catalog_box').height());
+
+			if ($('#odl').length <= 0 || $('#odl').height() < $(window).height()) {
+				$('#toolbar').css('display', 'none');
+				return false;
+			}
+			var toolbar = document.getElementById('toolbar');
+			var toolbarC = document.getElementById('toolbar-c');
+			var catalogBox = document.getElementById('Catalog_box');
+			var oDl = document.getElementById('odl');
+
+			var iMaxTop = toolbar.offsetHeight - toolbarC.offsetHeight;
+
+			toolbarC.onmousedown = function (ev) {
+
+				var ev = ev || event;
+				var disY = ev.clientY - this.offsetTop;
+				document.onmousemove = function (ev) {
+					var ev = ev || event;
+					var T = ev.clientY - disY;
+					if (T < 0) {
+						T = 0;
+					} else if (T > iMaxTop) {
+						T = iMaxTop;
+					}
+					toolbarC.style.top = T + 'px';
+					var iScale = T / iMaxTop;
+					oDl.style.top = (catalogBox.clientHeight - oDl.offsetHeight) * iScale + 'px';
+				}
+				document.onmouseup = function () {
+					document.onmousemove = document.onmouseup = null;
+				}
+
+				return false;
+
+			}
+
+		})
+	</script>
+
+
+</body>
+
+</html>
